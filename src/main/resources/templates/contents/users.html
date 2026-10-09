@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:fragment="content" class="flex-1 max-w-5xl w-full mx-auto px-6 py-10 flex flex-col gap-6">
+
+        <div class="flex justify-between items-center bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Usuários</h1>
+                <p class="text-slate-500 text-sm">Gerencie os acessos e membros cadastrados.</p>
+            </div>
+            <a th:href="@{/users/register}"
+                class="bg-[#043369] hover:bg-[#03254d] text-white px-4 py-2.5 rounded-lg font-medium text-sm transition-colors shadow-sm flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Novo Usuário
+            </a>
+        </div>
+
+        <div th:if="${users != null and !#lists.isEmpty(users)}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div th:each="user : ${users}"
+                class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex justify-between items-center hover:shadow-md transition-shadow">
+
+
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-full bg-[#043369]/10 text-[#043369] font-bold flex items-center justify-center text-lg">
+                        <span th:text="${#strings.substring(user.name,0,1).toUpperCase()}">U</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-900" th:text="${user.name}">Nome</h3>
+
+                            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full tracking-wider uppercase"
+                                th:classappend="${user.role.name() == 'MANAGER' ? 'bg-purple-100 text-purple-700' : (user.role.name() == 'TEACHER' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-150 text-emerald-700')}"
+                                th:text="${user.role}">ROLE</span>
+                        </div>
+                        <p class="text-xs text-slate-500" th:text="${user.email}">email@exemplo.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${users == null or #lists.isEmpty(users)}"
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
+            <p class="text-slate-400 font-medium">Nenhum usuário cadastrado no momento.</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

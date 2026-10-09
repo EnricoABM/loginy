@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <title>Criar Senha - Loginy</title>
+    </head>
+    <body class="bg-zinc-100 min-h-screen flex items-center justify-center">
+        <main class="w-full max-w-md px-4">
+            <form th:action="@{/users/register/confirm}" method="post" class="bg-white p-8 rounded-lg shadow-md flex flex-col gap-8 w-full">
+
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-4xl font-bold text-slate-900">
+                        Criar Senha
+                    </h1>
+                    <p class="text-lg text-slate-500 mt-2">
+                        Defina sua senha de acesso para finalizar o cadastro
+                    </p>
+                </div>
+
+                <!-- Campos ocultos que carregam o e-mail e o código vindos da URL -->
+                <input type="hidden" name="email" th:value="${email}">
+                <input type="hidden" name="code" th:value="${code}">
+
+                <div class="flex flex-col gap-2">
+                    <label for="password" class="text-slate-900 text-base font-medium">
+                        Nova Senha
+                    </label>
+                    <input placeholder="Digite sua nova senha" id="password" name="password" type="password" required
+                        class="w-full px-4 py-2 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none transition-colors">
+                </div>
+
+                <button type="submit"
+                    class="bg-[#043369] hover:bg-[#03254d] text-white w-full py-3 rounded-lg cursor-pointer flex justify-center items-center font-medium transition-colors shadow-sm">
+                    <span>Finalizar Cadastro</span>
+                </button>
+
+            </form>
+        </main>
+    </body>
+</html>
